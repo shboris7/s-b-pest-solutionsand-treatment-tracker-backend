@@ -48,4 +48,8 @@ public class ClientService {
         clientRepository.deleteById(id);
         return "Client deleted successfully";
     }
+
+    public List<Client> findByLastName(String lastName) {
+        return clientRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
+    }
 }

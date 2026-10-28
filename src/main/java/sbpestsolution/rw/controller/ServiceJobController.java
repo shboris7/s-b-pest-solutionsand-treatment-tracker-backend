@@ -1,5 +1,6 @@
 package sbpestsolution.rw.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sbpestsolution.rw.domain.JobStatus;
 import sbpestsolution.rw.domain.ServiceJob;
 import sbpestsolution.rw.service.ServiceJobService;
 
@@ -25,6 +27,18 @@ public class ServiceJobController {
     @GetMapping("/all")
     public ResponseEntity<List<ServiceJob>> getAll() {
         return new ResponseEntity<>(serviceJobService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/by-status")
+    public ResponseEntity<List<ServiceJob>> byStatus(@RequestParam JobStatus status) {
+        return new ResponseEntity<>(serviceJobService.findByStatus(status), HttpStatus.OK);
+    }
+
+    @GetMapping("/between")
+    public ResponseEntity<List<ServiceJob>> between(@RequestParam String start, @RequestParam String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
+        return new ResponseEntity<>(serviceJobService.findBetween(startDate, endDate), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

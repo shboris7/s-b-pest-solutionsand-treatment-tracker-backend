@@ -27,6 +27,11 @@ public class ClientController {
         return new ResponseEntity<>(clientService.getAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/by-last-name")
+    public ResponseEntity<List<Client>> byLastName(@RequestParam String lastName) {
+        return new ResponseEntity<>(clientService.findByLastName(lastName), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<Client> found = clientService.getById(id);

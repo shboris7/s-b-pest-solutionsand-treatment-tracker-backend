@@ -1,10 +1,12 @@
 package sbpestsolution.rw.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sbpestsolution.rw.domain.JobStatus;
 import sbpestsolution.rw.domain.ServiceJob;
 import sbpestsolution.rw.repository.ServiceJobRepository;
 
@@ -52,5 +54,13 @@ public class ServiceJobService {
         }
         serviceJobRepository.deleteById(id);
         return "Service job deleted successfully";
+    }
+
+    public List<ServiceJob> findByStatus(JobStatus status) {
+        return serviceJobRepository.findByStatusOrderByJobDateAsc(status);
+    }
+
+    public List<ServiceJob> findBetween(LocalDate start, LocalDate end) {
+        return serviceJobRepository.findByJobDateBetweenOrderByJobDateAsc(start, end);
     }
 }
