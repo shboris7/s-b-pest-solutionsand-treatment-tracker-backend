@@ -84,6 +84,9 @@ public class ServiceJobController {
         if (message.equals("The service job with that id does not exist")) {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
+        if (message.equals("That service job has treatment logs, delete them first")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

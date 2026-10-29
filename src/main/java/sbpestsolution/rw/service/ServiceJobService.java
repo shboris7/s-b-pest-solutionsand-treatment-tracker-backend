@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import sbpestsolution.rw.domain.JobStatus;
 import sbpestsolution.rw.domain.ServiceJob;
 import sbpestsolution.rw.repository.ServiceJobRepository;
+import sbpestsolution.rw.repository.TreatmentLogRepository;
 
 @Service
 public class ServiceJobService {
 
     @Autowired
     private ServiceJobRepository serviceJobRepository;
+
+    @Autowired
+    private TreatmentLogRepository treatmentLogRepository;
 
     public String save(ServiceJob serviceJob) {
         if (serviceJob.getJobDate().isBefore(LocalDate.now())) {
@@ -58,8 +62,12 @@ public class ServiceJobService {
     }
 
     public String delete(UUID id) {
-        if (!serviceJobRepository.existsById(id)) {
+        Optional<ServiceJob> existing = serviceJobRepository.findById(id);
+        if (existing.isEmpty()) {
             return "The service job with that id does not exist";
+        }
+        if (treatmentLogRepository.existsByServiceJob(existing.get())) {
+            return "That service job has treatment logs, delete them first";
         }
         serviceJobRepository.deleteById(id);
         return "Service job deleted successfully";
