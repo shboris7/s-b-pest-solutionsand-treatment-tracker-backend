@@ -48,6 +48,11 @@ public class ServiceJobController {
         return new ResponseEntity<>(serviceJobService.findBetween(startDate, endDate), HttpStatus.OK);
     }
 
+    @GetMapping("/stats/by-status")
+    public ResponseEntity<List<Object[]>> statsByStatus() {
+        return new ResponseEntity<>(serviceJobService.countByStatus(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<ServiceJob> found = serviceJobService.getById(id);
@@ -76,6 +81,12 @@ public class ServiceJobController {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @PatchMapping("/cancel-day")
+    public ResponseEntity<String> cancelDay(@RequestParam UUID technicianId, @RequestParam String date) {
+        LocalDate day = LocalDate.parse(date);
+        return new ResponseEntity<>(serviceJobService.cancelDay(technicianId, day), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

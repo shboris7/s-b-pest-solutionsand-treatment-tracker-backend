@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sbpestsolution.rw.domain.JobStatus;
 import sbpestsolution.rw.domain.ServiceJob;
 import sbpestsolution.rw.repository.ServiceJobRepository;
@@ -105,5 +106,15 @@ public class ServiceJobService {
         job.setStatus(newStatus);
         serviceJobRepository.save(job);
         return "Service job status updated successfully";
+    }
+
+    public List<Object[]> countByStatus() {
+        return serviceJobRepository.getStatusCounts();
+    }
+
+    @Transactional
+    public String cancelDay(UUID technicianId, LocalDate day) {
+        int count = serviceJobRepository.cancelDay(technicianId, day, JobStatus.CALLED_OFF, JobStatus.TREATED);
+        return count + " service jobs cancelled";
     }
 }
