@@ -46,4 +46,8 @@ public class VanService {
         vanRepository.deleteById(id);
         return "Van deleted successfully";
     }
+
+    public List<Van> findFree() {
+        return vanRepository.getFreeVans();
+    }
 }

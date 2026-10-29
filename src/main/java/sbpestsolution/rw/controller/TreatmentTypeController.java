@@ -27,6 +27,11 @@ public class TreatmentTypeController {
         return new ResponseEntity<>(treatmentTypeService.getAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/unused")
+    public ResponseEntity<List<TreatmentType>> unused() {
+        return new ResponseEntity<>(treatmentTypeService.findUnused(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<TreatmentType> found = treatmentTypeService.getById(id);

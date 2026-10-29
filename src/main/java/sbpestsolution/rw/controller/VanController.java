@@ -27,6 +27,11 @@ public class VanController {
         return new ResponseEntity<>(vanService.getAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/free")
+    public ResponseEntity<List<Van>> free() {
+        return new ResponseEntity<>(vanService.findFree(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<Van> found = vanService.getById(id);

@@ -50,4 +50,8 @@ public class TechnicianService {
         technicianRepository.deleteById(id);
         return "Technician deleted successfully";
     }
+
+    public List<Technician> findByTreatmentType(String name) {
+        return technicianRepository.searchByTreatmentTypeName(name);
+    }
 }

@@ -27,6 +27,11 @@ public class TechnicianController {
         return new ResponseEntity<>(technicianService.getAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/by-treatment-type")
+    public ResponseEntity<List<Technician>> byTreatmentType(@RequestParam String name) {
+        return new ResponseEntity<>(technicianService.findByTreatmentType(name), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<Technician> found = technicianService.getById(id);

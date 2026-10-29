@@ -45,4 +45,8 @@ public class TreatmentTypeService {
         treatmentTypeRepository.deleteById(id);
         return "Treatment type deleted successfully";
     }
+
+    public List<TreatmentType> findUnused() {
+        return treatmentTypeRepository.getUnusedTreatmentTypes();
+    }
 }

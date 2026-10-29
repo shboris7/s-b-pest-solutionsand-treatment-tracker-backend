@@ -32,6 +32,15 @@ public class ClientController {
         return new ResponseEntity<>(clientService.findByLastName(lastName), HttpStatus.OK);
     }
 
+    @GetMapping("/of-technician/{technicianId}")
+    public ResponseEntity<?> ofTechnician(@PathVariable UUID technicianId) {
+        Optional<List<Client>> clients = clientService.findByTechnician(technicianId);
+        if (clients.isPresent()) {
+            return new ResponseEntity<>(clients.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("The technician with that id does not exist", HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<Client> found = clientService.getById(id);

@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sbpestsolution.rw.domain.Client;
 import sbpestsolution.rw.repository.ClientRepository;
+import sbpestsolution.rw.repository.TechnicianRepository;
 
 @Service
 public class ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private TechnicianRepository technicianRepository;
 
     public String save(Client client) {
         clientRepository.save(client);
@@ -51,5 +55,12 @@ public class ClientService {
 
     public List<Client> findByLastName(String lastName) {
         return clientRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
+    }
+
+    public Optional<List<Client>> findByTechnician(UUID technicianId) {
+        if (!technicianRepository.existsById(technicianId)) {
+            return Optional.empty();
+        }
+        return Optional.of(clientRepository.getClientsOfTechnician(technicianId));
     }
 }
