@@ -21,7 +21,14 @@ public class ServiceJobController {
 
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody ServiceJob serviceJob) {
-        return new ResponseEntity<>(serviceJobService.save(serviceJob), HttpStatus.CREATED);
+        String message = serviceJobService.save(serviceJob);
+        if (message.equals("Service job date cannot be in the past")) {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        if (message.equals("Technician is already dispatched on that date")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
@@ -55,6 +62,18 @@ public class ServiceJobController {
         String message = serviceJobService.update(id, serviceJob);
         if (message.equals("The service job with that id does not exist")) {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<String> changeStatus(@PathVariable UUID id, @RequestParam JobStatus status) {
+        String message = serviceJobService.changeStatus(id, status);
+        if (message.equals("The service job with that id does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        if (message.startsWith("Cannot change status")) {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(message, HttpStatus.OK);
     }

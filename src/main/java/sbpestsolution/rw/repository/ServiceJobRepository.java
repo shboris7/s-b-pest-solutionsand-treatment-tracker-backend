@@ -12,4 +12,6 @@ public interface ServiceJobRepository extends JpaRepository<ServiceJob, UUID> {
     List<ServiceJob> findByStatusOrderByJobDateAsc(JobStatus status);
 
     List<ServiceJob> findByJobDateBetweenOrderByJobDateAsc(LocalDate start, LocalDate end);
+
+    boolean existsByTechnicianIdAndJobDateAndStatusNot(UUID technicianId, LocalDate jobDate, JobStatus status);
 }

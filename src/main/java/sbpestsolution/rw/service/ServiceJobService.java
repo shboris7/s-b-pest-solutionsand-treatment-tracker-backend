@@ -17,6 +17,15 @@ public class ServiceJobService {
     private ServiceJobRepository serviceJobRepository;
 
     public String save(ServiceJob serviceJob) {
+        if (serviceJob.getJobDate().isBefore(LocalDate.now())) {
+            return "Service job date cannot be in the past";
+        }
+        if (serviceJob.getTechnician() != null
+                && serviceJobRepository.existsByTechnicianIdAndJobDateAndStatusNot(
+                        serviceJob.getTechnician().getId(), serviceJob.getJobDate(), JobStatus.CALLED_OFF)) {
+            return "Technician is already dispatched on that date";
+        }
+        serviceJob.setStatus(JobStatus.REQUESTED);
         serviceJobRepository.save(serviceJob);
         return "Service job saved successfully";
     }
@@ -62,5 +71,31 @@ public class ServiceJobService {
 
     public List<ServiceJob> findBetween(LocalDate start, LocalDate end) {
         return serviceJobRepository.findByJobDateBetweenOrderByJobDateAsc(start, end);
+    }
+
+    public String changeStatus(UUID id, JobStatus newStatus) {
+        Optional<ServiceJob> existing = serviceJobRepository.findById(id);
+        if (existing.isEmpty()) {
+            return "The service job with that id does not exist";
+        }
+        ServiceJob job = existing.get();
+        JobStatus current = job.getStatus();
+
+        boolean allowed = false;
+        if (current == JobStatus.REQUESTED
+                && (newStatus == JobStatus.DISPATCHED || newStatus == JobStatus.CALLED_OFF)) {
+            allowed = true;
+        }
+        if (current == JobStatus.DISPATCHED
+                && (newStatus == JobStatus.TREATED || newStatus == JobStatus.CALLED_OFF)) {
+            allowed = true;
+        }
+        if (!allowed) {
+            return "Cannot change status from " + current + " to " + newStatus;
+        }
+
+        job.setStatus(newStatus);
+        serviceJobRepository.save(job);
+        return "Service job status updated successfully";
     }
 }

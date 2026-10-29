@@ -50,6 +50,33 @@ public class TechnicianController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    @PutMapping("/{technicianId}/treatment-types/{treatmentTypeId}")
+    public ResponseEntity<String> addTreatmentType(@PathVariable UUID technicianId,
+            @PathVariable UUID treatmentTypeId) {
+        String message = technicianService.addTreatmentType(technicianId, treatmentTypeId);
+        if (message.equals("The technician with that id does not exist")
+                || message.equals("That treatment type does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        if (message.equals("The technician already has that treatment type")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{technicianId}/van")
+    public ResponseEntity<String> changeVan(@PathVariable UUID technicianId, @RequestParam int vanNumber) {
+        String message = technicianService.changeVan(technicianId, vanNumber);
+        if (message.equals("The technician with that id does not exist")
+                || message.equals("The van with that vanNumber does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        if (message.equals("That van is taken by another technician")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable UUID id) {
         String message = technicianService.delete(id);
