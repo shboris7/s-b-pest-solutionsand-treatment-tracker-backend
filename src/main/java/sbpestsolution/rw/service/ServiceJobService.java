@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sbpestsolution.rw.domain.JobStatus;
@@ -37,6 +39,10 @@ public class ServiceJobService {
 
     public List<ServiceJob> getAll() {
         return serviceJobRepository.findAll();
+    }
+
+    public Page<ServiceJob> getPage(Pageable pageable) {
+        return serviceJobRepository.findAll(pageable);
     }
 
     public Optional<ServiceJob> getById(UUID id) {

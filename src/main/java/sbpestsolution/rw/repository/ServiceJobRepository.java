@@ -18,6 +18,10 @@ public interface ServiceJobRepository extends JpaRepository<ServiceJob, UUID> {
 
     boolean existsByTechnicianIdAndJobDateAndStatusNot(UUID technicianId, LocalDate jobDate, JobStatus status);
 
+    long countByJobDate(LocalDate jobDate);
+
+    long countByStatus(JobStatus status);
+
     @Query("SELECT j.status, COUNT(j) FROM ServiceJob j GROUP BY j.status")
     List<Object[]> getStatusCounts();
 
