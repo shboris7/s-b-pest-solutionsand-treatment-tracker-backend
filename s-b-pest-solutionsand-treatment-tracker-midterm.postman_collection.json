@@ -1,0 +1,537 @@
+{
+  "info": {
+    "_postman_id": "376aed69-4e65-4312-9b76-c3c08d1d4fa5",
+    "name": "sb-pest-solutionsand-treatment-tracker-midterm.postman_collection.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58715649",
+    "_collection_link": "https://go.postman.co/collection/58715649-376aed69-4e65-4312-9b76-c3c08d1d4fa5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Part A: Domain Model and CRUD",
+      "item": [
+        {
+          "name": "A2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"firstName\": \"Patrick\", \"lastName\": \"Nkurunziza\", \"phone\": \"0785566778\", \"address\": \"Kigali, Kimironko\" }http://localhost:8083/api/clients/allhttp://localhost:8083/api/clients/1d48aaab-0e2c-4839-95f0-e0a9e6a49b71GET http://localhost:8083/api/clients/3f2b8c1e-0000-4000-8000-000000000000",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/service-jobs/2f34de37-79c1-4970-a364-9b29107dbe6b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-jobs",
+                "2f34de37-79c1-4970-a364-9b29107dbe6b"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part B:Derived Queries",
+      "item": [
+        {
+          "name": "B1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/clients/by-last-name?lastName=sharangabo",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "clients",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "sharangabo"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-jobs/between?start=2026-10-01&end=2026-10-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-jobs",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-10-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part C : JPQL with Joins",
+      "item": [
+        {
+          "name": "C1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/by-treatment-type?name=termite",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "by-treatment-type"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "termite"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/vans/free",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "vans",
+                "free"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/treatment-types/unused",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "treatment-types",
+                "unused"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C4",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/clients/of-technician/64faa0ec-7ea7-4fc0-bd01-7e03c9a6eace",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "clients",
+                "of-technician",
+                "64faa0ec-7ea7-4fc0-bd01-7e03c9a6eace"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part D: Business Rules",
+      "item": [
+        {
+          "name": "D1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"jobDate\": \"2026-12-01\", \"status\": \"TREATED\", \"pestType\": \"Ants\", \"siteAddress\": \"KG 5 Ave, Remera\",\r\n  \"client\": { \"id\": \"ff4bd576-d304-4422-a6ae-c041c3852d54\" },\r\n  \"technician\": { \"id\": \"2b75e298-9f63-4852-ae40-ee90a0768e67\" } }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/service-jobs/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-jobs",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-jobs/d284ab18-e311-4b15-bc0d-fc4b1aa77528/status?status=DISPATCHED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-jobs",
+                "d284ab18-e311-4b15-bc0d-fc4b1aa77528",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "DISPATCHED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D3",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/abc305fe-a3a2-464c-8c57-ba797f96cdac/treatment-types/27fd7490-cadc-4566-8055-10426a1b9c96",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "abc305fe-a3a2-464c-8c57-ba797f96cdac",
+                "treatment-types",
+                "27fd7490-cadc-4566-8055-10426a1b9c96"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/technicians/64faa0ec-7ea7-4fc0-bd01-7e03c9a6eace/van?vanNumber=4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "technicians",
+                "64faa0ec-7ea7-4fc0-bd01-7e03c9a6eace",
+                "van"
+              ],
+              "query": [
+                {
+                  "key": "vanNumber",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part F: Reports and Bulk Updates",
+      "item": [
+        {
+          "name": "F1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-jobs/stats/by-status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-jobs",
+                "stats",
+                "by-status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "F2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-jobs/cancel-day?technicianId=64faa0ec-7ea7-4fc0-bd01-7e03c9a6eace&date=2026-10-20",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-jobs",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "technicianId",
+                  "value": "64faa0ec-7ea7-4fc0-bd01-7e03c9a6eace"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-10-20"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bonus",
+      "item": [
+        {
+          "name": "Bonus Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/dashboard/summary",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "dashboard",
+                "summary"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bonus Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-jobs/page?page=0&size=5&sort=jobDate,desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-jobs",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "jobDate,desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Part E: Treatment Log",
+      "item": [
+        {
+          "name": "E1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"productName\": \"Termidor SC\", \"notes\": \"Perimeter treatment\", \"quantityUsed\": 2 }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/treatment-logs/save?serviceJobId=9b74041f-ad24-4e12-a3c6-52b0aba11347",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "treatment-logs",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "serviceJobId",
+                  "value": "9b74041f-ad24-4e12-a3c6-52b0aba11347"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/treatment-logs/client/0781122334",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "treatment-logs",
+                "client",
+                "0781122334"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/service-jobs/delete/77f5f3b8-a10f-49d4-a260-a124ca725961",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "service-jobs",
+                "delete",
+                "77f5f3b8-a10f-49d4-a260-a124ca725961"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
